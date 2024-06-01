@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((responseData) => {
         console.log("Response:", responseData);
-        alert("Success");
+        alert("Success Mail Send Successfully!!!");
       })
       .catch((error) => {
         console.error("Error:", error);
