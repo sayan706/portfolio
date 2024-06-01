@@ -112,3 +112,34 @@ function scrollActive() {
 }
 
 window.addEventListener("scroll", scrollActive);
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("sendButton").addEventListener("click", function () {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+    const data = {
+      name: name,
+      email: email,
+      message: message,
+    };
+    console.log(data);
+
+    fetch("http://localhost:5000/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log("Response:", responseData);
+        alert("Success");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error sending email");
+      });
+  });
+});
