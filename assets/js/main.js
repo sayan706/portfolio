@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     console.log(data);
 
-    fetch("http://localhost:5000/send-email", {
+    fetch("https://express-smtp-connection.onrender.com/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
