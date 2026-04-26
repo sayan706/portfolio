@@ -31,9 +31,10 @@ function headerShadow() {
 /* ----- TYPING EFFECT ----- */
 var typingEffect = new Typed(".typedText", {
   strings: [
-    "Software Developer",
-    "Back End Developer",
-    "Proficient in communicating with ML",
+"AI & Machine Learning Engineer",
+"Full-Stack Developer",
+"Django & Backend Specialist",
+"AI-Powered Systems Builder",
   ],
   loop: true,
   typeSpeed: 100,
@@ -142,4 +143,88 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Error sending email");
       });
   });
+});
+
+/* ----- DARK/LIGHT THEME ----- */
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-theme'
+const iconTheme = 'uil-sun'
+
+// Previously selected topic (if user selected)
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+// We obtain the current theme that the interface has by validating the dark-theme class
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+
+// We validate if the user previously chose a topic
+if (selectedTheme) {
+  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+}
+
+// Activate / deactivate the theme manually with the button
+themeButton.addEventListener('click', () => {
+    // Add or remove the dark / icon theme
+    document.body.classList.toggle(darkTheme)
+    themeButton.classList.toggle(iconTheme)
+    // We save the theme and the current icon that the user chose
+    localStorage.setItem('selected-theme', getCurrentTheme())
+    localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+/* ----- CLOSE NAVBAR ON LINK CLICK ----- */
+const navLinks = document.querySelectorAll(".nav-link");
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const menuBtn = document.getElementById("myNavMenu");
+    menuBtn.className = "nav-menu";
+  });
+});
+
+/* ----- PROJECT MODAL ----- */
+const modal = document.getElementById("project-modal");
+const closeModalBtn = document.querySelector(".close-modal");
+const projectBoxes = document.querySelectorAll(".project-box");
+
+// Modal elements
+const modalImg = document.getElementById("modal-img");
+const modalTitle = document.getElementById("modal-title");
+const modalLabel = document.getElementById("modal-label");
+const modalDesc = document.getElementById("modal-desc");
+const modalLink = document.getElementById("modal-link");
+
+projectBoxes.forEach(box => {
+    box.addEventListener("click", () => {
+        // Extract data from the clicked box
+        const img = box.querySelector("img").src;
+        const title = box.querySelector("h3").innerText;
+        const label = box.querySelector("label").innerText;
+        const desc = box.querySelector("p").innerHTML;
+        const link = box.querySelector(".more-info").href;
+
+        // Populate modal
+        modalImg.src = img;
+        modalTitle.innerText = title;
+        modalLabel.innerText = label;
+        modalDesc.innerHTML = desc;
+        modalLink.href = link;
+
+        // Show modal
+        modal.classList.add("active");
+    });
+});
+
+// Close modal logic
+closeModalBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.remove("active");
+    }
 });

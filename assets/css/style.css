@@ -5,6 +5,7 @@
 :root{
     --body-color: rgb(250, 250, 250);
     --color-white: rgb(255, 255, 255);
+    --color-black: #000;
 
     --text-color-second: rgb(68, 68, 68);
     --text-color-third: rgb(30, 159, 171);
@@ -15,7 +16,20 @@
     --second-color: rgb(0, 201, 255);
     --third-color: rgb(192, 166, 49);
     --first-shadow-color: rgba(0, 0, 0, 0.1);
+    --footer-bg-color: #F8F8F8;
+    --btn-bg-color: #efefef;
 
+}
+
+/* ----- DARK THEME VARIABLES ----- */
+body.dark-theme{
+    --body-color: #0a0a0a;
+    --color-white: #1a1a1a;
+    --color-black: #fff;
+    --text-color-second: #fff;
+    --first-shadow-color: rgba(255, 255, 255, 0.1);
+    --footer-bg-color: #1a1a1a;
+    --btn-bg-color: #222;
 }
 
 /* ----- BASE ----- */
@@ -29,6 +43,7 @@
 /* ----- SMOOTH SCROLL ----- */
 html{
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 /* ----- CHANGE THE SCROLL BAR DESIGN ----- */
@@ -54,12 +69,15 @@ html{
 .btn{
     font-weight: 500;
     padding: 12px 20px;
-    background: #efefef;
+    background: var(--btn-bg-color);
+    color: var(--text-color-second);
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: .4s;
-    
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
 }
 .btn>i{
     margin-left: 10px;
@@ -77,6 +95,7 @@ i{
 /* ------- BASE -------- */
 body{
     background: var(--body-color);
+    overflow-x: hidden;
 }
 .container{
     width: 100%;
@@ -95,6 +114,7 @@ nav{
     padding-inline: 9vw;
     transition: .3s;
     z-index: 100;
+    gap: 20px;
 }
 .nav-logo{
    position: relative;
@@ -107,7 +127,7 @@ nav{
 .nav-logo span{
     position: absolute;
     top: -15px;
-    right: -20px;
+    right: -15px;
     font-size: 5em;
     color: var(--text-color-second);
 }
@@ -131,6 +151,13 @@ nav{
 .nav-menu-btn i{
     font-size: 28px;
     cursor: pointer;
+    color: var(--text-color-second);
+}
+#theme-button{
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-color-second);
+    margin-right: 10px;
 }
 .active-link{
     position: relative;
@@ -219,8 +246,12 @@ nav{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 5px 0px var(--first-shadow-color);
     cursor: pointer;
+    background: var(--color-white);
+}
+.icon i{
+    color: var(--text-color-second);
 }
 .icon:hover{
     color: var(--first-color);
@@ -269,6 +300,7 @@ nav{
    background: var(--color-white);
    border-radius: 30px;
    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+   z-index: 10;
 }
 .scroll-btn i{
     font-size: 20px;
@@ -390,22 +422,7 @@ h3{
 }
 
 .more-info {
-    position: absolute;
-    bottom: 10px; /* Adjust this value to position the link */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    text-decoration: none;
-    color: var(--color-black);
-    display: block;
-    opacity: 0;
-    transition: opacity 0.4s;
-}
-
-.project-link:hover .more-info {
-    opacity: 1;
+    display: none;
 }
 
 .project-box img {
@@ -441,8 +458,86 @@ h3{
 }
 
 .project-box p {
-    font-size: 14px;
-    margin-bottom: 20px;
+    display: none;
+}
+
+/* ----- MODAL STYLES ----- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.modal.active {
+    display: flex;
+}
+.modal-content {
+    background-color: var(--body-color);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.close-modal {
+    color: var(--text-color-second);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.close-modal:hover {
+    background: var(--first-color);
+}
+#modal-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+}
+.modal-body {
+    padding: 30px;
+}
+#modal-title {
+    font-size: 2rem;
+    color: var(--text-color-second);
+    margin-bottom: 5px;
+}
+#modal-label {
+    font-size: 16px;
+    color: var(--first-color);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 15px;
+}
+#modal-desc {
+    font-size: 15px;
+    color: var(--text-color-second);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.modal-btn-container {
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
@@ -498,27 +593,47 @@ h3{
     overflow: hidden;
 }
 .contact-info>h2{
-    color: var(--color-white);
+    color: #fff;
     margin-bottom: 20px;
 }
 .contact-info>p{
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--color-white);
+    color: #fff;
     margin-block: 5px;
+    text-align: center;
 }
 .contact-info p>i{
-    font-size: 18px;
+    font-size: 20px;
+    color: #fff;
 }
-.contact-info::after{
-    background: var(--color-white);
+.contact-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(14px, 4vw, 16px);
+    position: relative;
+    word-break: break-word;
+    transition: color 0.3s;
 }
-.contact-info:hover.contact-info h2,
-.contact-info:hover.contact-info p,
-.contact-info:hover.contact-info i{
-    color: #777;
-    z-index: 2;
+.contact-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+.contact-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.contact-link:hover {
+    color: #f1f1f1;
 }
 
 /* ----- CONTACT FORM ----- */
@@ -541,6 +656,7 @@ h3{
     border-radius: 10px;
     padding-inline: 20px;
     outline: none;
+    color: var(--text-color-second);
 }
 textarea{
     width: 100%;
@@ -551,6 +667,7 @@ textarea{
     padding: 15px 20px;
     outline: none;
     resize: none;
+    color: var(--text-color-second);
 }
 .form-button>.btn{
     display: flex;
@@ -574,12 +691,13 @@ footer{
     align-items: center;
     flex-direction: column;
     row-gap: 30px;
-    background: #F8F8F8;
+    background: var(--footer-bg-color);
     padding-block: 40px 60px;
 }
 .top-footer p{
     font-size: 25px;
     font-weight: 600;
+    color: var(--text-color-second);
 }
 .middle-footer .footer-menu{
     display: flex;
@@ -600,6 +718,7 @@ footer{
 .bottom-footer{
     font-size: 14px;
     margin-top: 10px;
+    color: var(--text-color-second);
 }
 
 
@@ -629,7 +748,7 @@ footer{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: rgba(255, 255, 255, 0.7);
+        background: var(--body-color);
         backdrop-filter: blur(20px);
         width: 100%;
         min-height: 450px;
@@ -639,6 +758,9 @@ footer{
     .nav_menu_list{
         flex-direction: column;
     }
+    #theme-button{
+        margin-left: auto;
+    }
     .nav-menu-btn{
         display: flex;
         align-items: center;
@@ -647,7 +769,8 @@ footer{
     .featured-box{
         flex-direction: column;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
     }
     .featured-text{
         width: 100%;
@@ -655,6 +778,7 @@ footer{
         justify-content: center;
         align-content: flex-start;
         min-height: 60vh;
+        padding-bottom: 100px;
     }
     .social_icons{
         margin-top: 2em;
