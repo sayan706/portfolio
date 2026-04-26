@@ -31,9 +31,9 @@ function headerShadow() {
 /* ----- TYPING EFFECT ----- */
 var typingEffect = new Typed(".typedText", {
   strings: [
-"AI & Machine Learning Engineer",
+"AI &amp; Machine Learning Engineer",
 "Full-Stack Developer",
-"Django & Backend Specialist",
+"Django &amp; Backend Specialist",
 "AI-Powered Systems Builder",
   ],
   loop: true,

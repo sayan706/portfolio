@@ -788,11 +788,14 @@ footer{
         justify-content: center;
         min-height: 150px;
         width: 100%;
-        margin-top: 65px;
+        margin-top: 110px;
     }
     .image, .image img{
         width: 150px;
         height: 150px;
+    }
+    .image img {
+        object-position: center top;
     }
     .row{
         display: flex;
